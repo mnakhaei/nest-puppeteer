@@ -8,8 +8,15 @@ import {
   OnModuleDestroy,
 } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import type { LaunchOptions, Browser, BrowserContext } from 'puppeteer';
-import { launch } from 'puppeteer';
+import type {
+    LaunchOptions,
+    Browser,
+    BrowserContext,
+    BrowserLaunchArgumentOptions,
+    BrowserConnectOptions
+} from 'puppeteer';
+import { default as Puppeteer } from 'puppeteer';
+
 import {
   PUPPETEER_INSTANCE_NAME,
   DEFAULT_PUPPETEER_INSTANCE_NAME,
@@ -20,7 +27,7 @@ import type {
   PuppeteerModuleAsyncOptions,
   PuppeteerOptionsFactory,
   PuppeteerModuleOptions,
-} from './interfaces/puppeteer-options.interface';
+} from './interfaces';
 import {
   getBrowserToken,
   getContextToken,
@@ -51,7 +58,7 @@ export class PuppeteerCoreModule
     const browserProvider = {
       provide: getBrowserToken(instanceName),
       async useFactory() {
-        return await launch(launchOptions);
+        return await Puppeteer.launch(launchOptions);
       },
     };
 
@@ -95,7 +102,7 @@ export class PuppeteerCoreModule
     const browserProvider = {
       provide: getBrowserToken(puppeteerInstanceName),
       async useFactory(puppeteerModuleOptions: PuppeteerModuleOptions) {
-        return await launch(
+        return await Puppeteer.launch(
           puppeteerModuleOptions.launchOptions ?? DEFAULT_CHROME_LAUNCH_OPTIONS,
         );
       },
