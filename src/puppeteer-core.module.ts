@@ -40,7 +40,7 @@ export class PuppeteerCoreModule
   }
 
   static forRoot(
-    launchOptions: LaunchOptions = DEFAULT_CHROME_LAUNCH_OPTIONS,
+    launchOptions: LaunchOptions & BrowserLaunchArgumentOptions & BrowserConnectOptions= DEFAULT_CHROME_LAUNCH_OPTIONS,
     instanceName: string = DEFAULT_PUPPETEER_INSTANCE_NAME,
   ): DynamicModule {
     const instanceNameProvider = {
