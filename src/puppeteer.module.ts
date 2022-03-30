@@ -4,7 +4,8 @@ import { PuppeteerCoreModule } from './puppeteer-core.module';
 import type {
   PuppeteerModuleAsyncOptions,
   PuppeteerModuleOptions,
-} from './interfaces/puppeteer-options.interface';
+} from './interfaces';
+import {BrowserConnectOptions, BrowserLaunchArgumentOptions} from "puppeteer";
 
 /**
  * Module for the Puppeteer
@@ -18,7 +19,7 @@ export class PuppeteerModule {
    * will be used.
    */
   static forRoot(
-    options?: PuppeteerModuleOptions['launchOptions'] & { isGlobal?: boolean },
+    options?: PuppeteerModuleOptions['launchOptions'] & { isGlobal?: boolean } & BrowserLaunchArgumentOptions & BrowserConnectOptions,
     instanceName?: string,
   ): DynamicModule {
     return {
