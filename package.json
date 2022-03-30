@@ -19,6 +19,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist",
+    "prepare": "npm run build",
     "build": "nest build",
     "lint": "eslint --ext=ts ./src",
     "prepublishOnly": "yarn build",
