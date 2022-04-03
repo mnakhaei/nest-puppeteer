@@ -62,13 +62,13 @@ export class PuppeteerCoreModule
       },
     };
 
-    const contextProvider = {
-      provide: getContextToken(instanceName),
-      async useFactory(browser: Browser) {
-        return browser.createIncognitoBrowserContext();
-      },
-      inject: [getBrowserToken(instanceName)],
-    };
+    // const contextProvider = {
+    //   provide: getContextToken(instanceName),
+    //   async useFactory(browser: Browser) {
+    //     return browser.createIncognitoBrowserContext();
+    //   },
+    //   inject: [getBrowserToken(instanceName)],
+    // };
 
     const pageProvider = {
       provide: getPageToken(instanceName),
@@ -83,10 +83,14 @@ export class PuppeteerCoreModule
       providers: [
         instanceNameProvider,
         browserProvider,
-        contextProvider,
+        // contextProvider,
         pageProvider,
       ],
-      exports: [browserProvider, contextProvider, pageProvider],
+      exports: [
+        browserProvider,
+        // contextProvider, 
+        pageProvider
+      ],
     };
   }
 
